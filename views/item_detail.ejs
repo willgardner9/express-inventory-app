@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
+    <div class="item-container">
+        <div class="item-wrapper">
+            <div class="flex row bb-2 align-bottom">
+                <h1><%= results.name %></h1>
+                <p class="mb-4"> <a href="/">Inventory</a> > <a href="../category/<%= results.category._id %>"><%= results.category.name %></a> > <%= results.name %></p>
+            </div>
+            <p class="italic mb-2"><%= results.description %></p>
+            <p class="mb-2">Stock: <%= results.stock %></p>
+            <p class="mb-2">Cost: £<%= results.price %></p>
+        </div>
+    </div>
+  </body>
+</html>

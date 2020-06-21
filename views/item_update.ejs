@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
+    <div class="item-container">
+        <div class="item-wrapper">
+            <div class="item-row-auto">
+                <form action="" method="POST">
+                    <label for="name">Name:</label><input type="text" name="name" required="true" value="<%= items.name %>">
+                    <label for="description">Description:</label><input type="description" name="description" required="true" value="<%= items.description %>">
+                    <label for="category">Category:</label><select name="category" required="true">
+                        <% category.forEach(function(result) {%>
+                            <option value="<%= result._id %>" selected><%= result.name %></option>
+                        <% }); %>
+                    </select>
+                    <label for="price">Cost:</label><input type="text" name="price" id="" required="true" value="<%= items.price %>">
+                    <label for="stock">Stock:</label><input type="number" name="stock" id="" required="true" value="<%= items.stock %>">
+                    <button class="btn column-fill" type="submit">Update item</button>
+                </form>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>

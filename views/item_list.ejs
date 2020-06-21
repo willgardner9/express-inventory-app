@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
+    <div class="item-container">
+        <div class="item-wrapper">
+          <div class="flex row justify-flex-end mt-2">
+            <a href="../inventory/create/item"><button class="btn">Add item</button></a>
+          </div>
+            <div class="item-row-reverse">
+                <h2>Item</h2>
+                <h2>Stock</h2>
+                <h2>Price (£)</h2>
+                <h2 class="flex justify-flex-end">Actions</h2>
+            </div>
+            <% results.forEach(function(result) {%>
+                <div class="item-row">
+                    <p><%= result.name %></p>
+                    <p><%= result.stock %></p>
+                    <p>£<%= result.price %></p>
+                    <div class="flex row justify-flex-end">
+                        <p class="mr-2 small-link"><a href="./item/<%= result._id %>">View</a></p>
+                        <p class="mr-2 small-link"><a href="./item/<%= result._id %>/update">Edit</a></p>
+                        <div id="delete-container">
+                          <p class="mr-2 small-link delete-button"><a>Delete</a></p>
+                          <p class="mr-2 delete-button-opaque hidden"><a href="./item/<%= result._id %>/delete" class="white">Delete</a></p>  
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  const deleteButtons = Array.from(document.getElementsByClassName('delete-button'));
+
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      let target = e.target;
+      let targetContainer = target.parentNode.parentNode;
+      let visibleDeleteButton = targetContainer.firstElementChild;
+      let hiddenDeleteButton = targetContainer.lastElementChild;
+      visibleDeleteButton.classList.toggle('hidden');
+      hiddenDeleteButton.classList.toggle('hidden');
+    })
+  })
+</script>

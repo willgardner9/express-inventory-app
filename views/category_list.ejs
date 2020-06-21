@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
+    <div class="item-container">
+        <div class="item-wrapper">
+          <div class="flex row justify-flex-end mt-2">
+            <a href="../inventory/create/category"><button class="btn">Add category</button></a>
+          </div>
+            <div class="item-row-reverse-3col">
+                <h2>Category</h2>
+                <h2>Description</h2>
+                <h2 class="flex justify-flex-end">Actions</h2>
+            </div>
+            <% results.forEach(function(result) {%>
+                <div class="item-row-3col">
+                    <p><%= result.name %></p>
+                    <p><%= result.description %></p>
+                    <div class="flex row justify-flex-end">
+                        <p class="mr-2 small-link"><a href="./category/<%= result._id %>">View</a></p>
+                        <p class="mr-2 small-link"><a href="./category/<%= result._id %>/update">Edit</a></p>
+                        <div id="delete-container">
+                          <p class="mr-2 small-link delete-button"><a>Delete</a></p>
+                          <p class="mr-2 delete-button-opaque hidden"><a href="./item/<%= result._id %>/delete" class="white">Delete</a></p>  
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  const deleteButtons = Array.from(document.getElementsByClassName('delete-button'));
+
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      let target = e.target;
+      let targetContainer = target.parentNode.parentNode;
+      let visibleDeleteButton = targetContainer.firstElementChild;
+      let hiddenDeleteButton = targetContainer.lastElementChild;
+      visibleDeleteButton.classList.toggle('hidden');
+      hiddenDeleteButton.classList.toggle('hidden');
+    })
+  })
+</script>
