@@ -8,6 +8,7 @@ var favicon = require('serve-favicon');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const inventoryRouter = require('./routes/inventory');
+require('dotenv').config()
 
 var app = express();
 
@@ -15,7 +16,7 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://willgardner9:bWrrVCZTY0XDlcwq@cluster0-mdp8d.mongodb.net/office_inventory_app?retryWrites=true&w=majority';
+var mongoDB = process.env.DB_KEY;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
